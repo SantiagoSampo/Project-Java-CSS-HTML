@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/estilos.css"> 
+    <title>Trivia</title>
+    <script src="./js/datosPrueba.js"></script>
+    <script src="./js/Clases.js"></script>
+    <script src="./js/Funciones.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="./img/logo.png" width="100" height="100" id="Logo" alt="Logo trivia">
+        <nav>
+            <ul class="ListaOpciones" id="ListaOpciones">
+                <li id="InfoGeneral"><a href="#InfoGral">Información General</a></li>
+                <li id="GestionTemas"><a href="#GestTemasA">Administrar</a></li> 
+                <li id="Ajugar"><a href="#AJugar">¡Jugar!</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <section id="DescripGral" class="seccion">
+    <h2 id="titDescr" class="subtitulos">Descripción general</h2>
+    <article>
+        <h3 id="queEncontraras" class="sub2titulos" >¿Qué encontrarás en este sitio?</h3>
+        <p class="textoInicial">En este sitio podrás crear temas, preguntas y jugar a nuestra versión del conocido juego de Trivia.</p>
+        <p class="textoInicial">Es una prueba de conocimientos generales con preguntas y respuestas.</p>
+        <p class="textoInicial">Cada uno tiene un nombre y una descripción. Cada pregunta es de un tema, tiene un nivel(1-muy fácil, ..., 5-muy díficil), un texto que la describe y te aparecerán varias respuestas, pero una sola es la correcta. Si la respondes bien, sumas 10 puntos, por cada error pierdes un punto, ¡pero puede usar la ayuda!.</p>
+        <p class="textoInicial">El sitio fue desarrollado en el 1er. semestre 2024 - Programación I - Universidad ORT Uruguay</p>
+    </article>
+</section>
+
+<section id="Gest" class="seccion">
+    <h2 id="titGestTemas" class="subtitulos">Gestión de temas</h2>
+    <article>
+        <h3 id="altaTemas" class="sub2titulos">Alta de temas</h3>
+        <form id="IdFormulario1">
+        <label for="NombreTema" class="label">Nombre </label>
+            <input type= "text" id="NombreTema" name="NombreTema" required> 
+        <label for="DescripcionTema" class="label">Descripción</label>
+            <input type="text" id="DescripcionTema" name="DescripcionTema" required >
+        <button type="button" id="botonAltaTema" class="botones">Agregar</button>
+        </form>
+        <h3 id="DatosGralesTemas" class="sub2titulos">Datos generales de temas</h3>
+        <p id="ContadorTema">Lista de temas (total de temas: 0)</p>
+        <ul id="IdListaTemas">
+            <li class="ListaTemas">Sin datos</li>
+        </ul>
+
+        <p id="promedioPreguntas">Promedio de preguntas por tema (cantidad total de preguntas/cantidad total de temas): sin datos</p>
+        <p>Temas sin preguntas:</p>
+        <ul id="TemassinPreguntas">
+            <li class="ListaTemas">Sin datos</li>
+        </ul>
+    </article>
+    <article>
+        <h2 id="GestPreg" class="subtitulos">Gestión de preguntas</h2>
+        <h3 class="sub2titulos">Alta de preguntas</h3>
+        <form id="IdFormulario2">
+        <label for="TemaAlta" class="label"> Tema</label>
+            <select id="TemaAlta" name="tema">
+                <option value=" " label=" "> </option>
+            </select>
+        <label for="NivelAlta" class="label">Nivel</label>
+            <input type="number" id="NivelAlta" name="NivelAlta" min="1" max="5" required><br>
+        <label for="TextoPreg" class="label">Texto de la pregunta</label>
+            <input type="text" id="TextoPreg" name="TextoPreg" required >
+        <label for="RespuestaCorr" class="label">Respuesta Correcta</label>
+            <input type="text" id="RespuestaCorr" name="RespuestaCorr" required >
+        <label for="RespuestaIncorr" class="label">Respuestas Incorrectas</label>
+            <input type="text" id="RespuestaIncorr" name="RespuestaIncorr" required >
+        <button id="botonAltaPreg" class="botones" >Agregar</button>
+    </form>
+        <h3 class="sub2titulos">Datos generales de preguntas</h3>
+        <p id="TotalPreguntas">Total de preguntas registradas: 0 preguntas</p>
+        <p id="MaximoPuntaje">Máximo puntaje obtenido por un jugador: sin datos</p>
+        <label for="OrdenCreciente" class="label">Preguntas registradas:</label>
+                <input type="radio" id="OrdenCreciente" name="Orden" value="Creciente" checked>
+                    <label for="OrdenCreciente" class="label">Orden nombre tema creciente/nivel creciente</label>
+        <input type="radio" id="OrdenDecreciente" name="Orden" value="Decreciente">
+            <label for="OrdenDecreciente" class="label">Orden nombre tema decreciente/nivel creciente</label>
+        <div id="tabla-container">
+            <table id="tabla">
+            <thead>
+            <tr>
+                <th><strong>Nombre del tema</strong></th>
+                <th><strong>Nivel</strong></th>
+                <th><strong>Texto de la pregunta</strong></th>
+                <th><strong>Respuesta correcta</strong></th>
+                <th><strong>Respuestas incorrectas</strong></th>
+            </tr>
+        </thead>
+        <tbody id="IdTablaPreguntas"></tbody>
+        </table>
+        </div>
+        <div id="ext"></div>
+    </article>
+</section>
+
+<section id="jugar" class="seccion">
+    <h2 id="AJugar" class="subtitulos">¡A jugar!</h2>
+    <article>   
+        <h3 id="Configuración" class="sub2titulos">Configuración</h3>
+        <form id="IdFormulario3">
+        <label for="TemaElegir" class="label">Tema a elegir</label>
+            <select id="TemaElegir" name="tema" required>
+                <option value="" label=" "> </option>
+            </select>
+        <label for="NivelJuego" class="label">Nivel del juego</label>
+            <input type="number" id="NivelJuego" name="NivelJuego" min="1" max="5" required>
+            <button type="button" id="botonJugar" class="botones">Jugar</button>
+        </form>
+        <div id="juegoCont">
+            <h3 id="Juego" class="sub2titulos">Juego</h3>
+            <p id="Puntaje">Puntaje acumulado en esta Partida: 0</p>
+            <p>La pregunta es....:</p>
+            <P id="Preg">TEXTO DE LA PREGUNTA</P>
+            <div id="botonesResp">
+            <button id="botonRespuesta1" class="botonesDRespuesta">Respuesta 1</button>
+            <button id="botonRespuesta2" class="botonesDRespuesta">Respuesta 2</button>
+            <button id="botonRespuesta3" class="botonesDRespuesta">Respuesta 3</button><br>
+            </div>
+            <div id="botonesFinal">
+            <button id="BAyuda" class="botonesFin">Ayuda</button>
+            <button id="BSig" class="botonesFin">Siguiente Pregunta</button>
+            <button id="BTer" class="botonesFin">Terminar</button>
+            </div>
+        </div>
+    </article>
+</section>
+</body>
+</html>
